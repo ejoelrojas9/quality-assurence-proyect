@@ -1,0 +1,64 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header text-center">
+      <h3 class="modal-title text-primary">Manager Form</h3>
+    </div>
+    <div class="modal-body">
+      <% url = @manager.id.present? ? manager_path(@manager.id) : managers_path(@manager) %>
+      <%= form_for @manager, url: url, data: { remote: true } do |f| %>
+        <table class="table">
+          <% if @manager.id.present? %>
+            <legend> <i class="bi bi-person-plus-fill"></i> Edit <%= @manager.name %></legend>
+          <% else %>
+            <legend> <i class="bi bi-person-plus-fill"></i> New manager</legend>
+          <% end %>
+          <% if @manager.id.present? %>
+            <tr class="mb-3">
+                <td><%= f.label :id %></td>
+                <td><%= f.text_field :id, class: 'form-control', disabled: true %></td>
+            </tr>
+          <% end %>
+          <tr class="mb-3">
+              <td><%= f.label :first_name %></td>
+              <td><%= f.text_field :first_name, require: true, class: 'form-control' %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :last_name %></td>
+            <td><%= f.text_field :last_name, require: true, class: 'form-control' %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :email %></td>
+            <td><%= f.text_field :email, require: true, class: 'form-control' %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :phone %></td>
+            <td><%= f.text_field :phone, require: true, class: 'form-control' %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :city %></td>
+            <td><%= f.text_field :city, require: true, class: 'form-control' %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :age %></td>
+            <td><%= f.text_field :age, require: true, class: 'form-control' %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :notes %></td>
+            <td><%= f.text_area :notes, require: true, class: 'form-control' %></td>
+          </tr>
+        </table>
+        <div class="modal-footer p-3">
+          <div class="container text-end">
+          <button data-bs-dismiss="modal" type="button" class="btn btn-danger">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+
+

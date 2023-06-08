@@ -1,0 +1,57 @@
+<div class="container bg-light">
+  <div class="content-header mt-5 p-5">
+  <div><%= render '/shared/flash' %></div>
+    <% if current_admin.present? %>
+      <a href="<%= destroy_admin_session_path -%>" class="p-3"><i class="fa fa-ban fa-fw pull-right"></i> Logout</a>
+    <% end %>
+    <div class="header-section mt-3 p-3">
+      <h1>Access de information of the managers</h1>
+      <a onclick="load_form()" class="btn btn-success p-2"><i class="fa fa-ban fa-fw pull-right"></i>New manager</a>
+    </div>
+    <div class="block full block-all-noboder table-responsive-form-control mt-5">
+      <table class="table data-table">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @managers.each do |manager| %>
+            <tr class="p-3">
+              <td>
+                <%= manager.id %>
+              </td>
+              <td>
+                <%= manager.name %>
+              </td>
+              <td>
+                <%= manager.email %>
+              </td>
+              <td><a href="<%= manager_path(id: manager.id)%>" class="btn btn-info">Details</a></td>
+            </tr>
+            <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<% content_for :footer_scripts do %>
+
+  <script>
+    function load_form() {
+      console.log("Load form")
+      $.get("<%= managers_path(@manager) -%>", function(view){
+      $("#modal").html(view)
+      $("#modal").modal('show')
+    })
+    }
+
+  </script>
+
+<% end %>
+
+<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;"></div> 

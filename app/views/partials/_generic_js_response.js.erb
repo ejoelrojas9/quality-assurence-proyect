@@ -1,0 +1,11 @@
+<% if @success %>
+	location.reload()
+<% else %>
+	$("#record-errors").show()
+	$("#record-errors").text("<%= @errors %>")
+	alert("There was an error with your request, please review the errors")
+	<% if @reload.present? and @reload == true %>
+		location.reload()
+	<% end %>
+	$("#record-errors")[0].scrollIntoView()
+<% end %>

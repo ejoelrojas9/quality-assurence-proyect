@@ -1,0 +1,72 @@
+
+<div class="container bg-light">
+  <div class="content-header mt-5 p-5">
+    <div><%= render '/shared/flash' %></div>
+    <% if current_admin.present? %>
+      <a href="<%= managers_path -%>" class="p-3" onclick=><i class="fa fa-ban fa-fw pull-right"></i> Home</a>
+      <a href="<%= destroy_admin_session_path -%>" class="p-3"><i class="fa fa-ban fa-fw pull-right"></i> Logout</a>
+    <% end %>
+    <div class="container mt-3 p-3">
+    <a onclick="load_form()" class="btn btn-outline-success p-2"></i>Settings</a>
+    </div>
+    <div class="header-section mt-3 p-3">
+      <h3>Access de information of the manager: <%= @manager.name %></h3>
+    </div>
+    <div class="tab-content mt-3 p-3">
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-11">
+          <table class="table form.control">
+            <tr>
+              <td class="p-3"><b>Id:</b></td>
+              <td class="p-3"><%= @manager.id %></td>
+              <td class="p-3"><b>Name:</b></td>
+              <td class="p-3"><%= @manager.name %></td>
+            </tr>
+            <tr>
+              <td class="p-3"><b>Email:</b></td>
+              <td class="p-3"><%= @manager.email %></td>
+              <td class="p-3"><b>Phone:</b></td>
+              <td class="p-3"><%= @manager.phone %></td>
+            </tr>
+            <tr>
+              <td class="p-3"><b>City:</b></td>
+              <td class="p-3"><%= @manager.city %></td>
+              <td class="p-3"><b>Age:</b></td>
+              <td class="p-3"><%= @manager.age %></td>
+            </tr>
+            <tr>
+              <td class="p-3"><b>Note:</b></td>
+              <td class="p-3"><%= @manager.notes %></td>
+              <td class="p-3"><b></b></td>
+              <td class="p-1"><%= link_to "Delete", manager_path(id: @manager.id), class: 'btn btn-outline-danger', data: { 
+                  turbo_method: :delete,
+                  turbo_confirm: 'Are you sure to DELETE this article?'
+                  } %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :footer_scripts do -%>
+
+  <script>
+  function load_form() {
+    console.log("Load form")
+    $.get("<%= edit_manager_path(id: @manager.id) -%>", function(view){
+      $("#modal").html(view)
+      $("#modal").modal('show')
+    })
+  }
+
+  </script>
+
+<% end %>
+
+  <!-- Modal -->
+<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+
+</div>
