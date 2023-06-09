@@ -4,7 +4,7 @@
       <h3 class="modal-title text-primary">Manager Form</h3>
     </div>
     <div class="modal-body">
-      <% url = @manager.id.present? ? manager_path(@manager.id) : managers_path(@manager) %>
+      <% url = @manager.id.blank? ? managers_path(@manager) : manager_path(@manager) %>
       <%= form_for @manager, url: url, data: { remote: true } do |f| %>
         <table class="table">
           <% if @manager.id.present? %>

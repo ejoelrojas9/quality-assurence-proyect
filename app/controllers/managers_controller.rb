@@ -41,7 +41,7 @@ class ManagersController < ApplicationController
     end
   end
 
-  def destroy_manager
+  def destroy
     set_manager
     byebug
     if @manager.destroy
